@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager aLayoutManager;
     public String newBandName;
     public String newBandDescription;
+    public BandModel band;
 
     private List<BandModel> bandList = new ArrayList<>();
 
@@ -53,46 +54,98 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK)
-            {
-                newBandName=data.getStringExtra("bandN");
-                newBandDescription=data.getStringExtra("bandD");
-                this.bandList.add(new BandModel(newBandName,newBandDescription));
-                this.rv_didNotCopy.getAdapter().notifyDataSetChanged();
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-
-            }
-        }
-    }
 
     private void hardCodeBands()
     {
-        this.bandList.add(new BandModel("Led Zeppelin"));
-        this.bandList.add(new BandModel("Pink Floyd"));
-        this.bandList.add(new BandModel("Queen"));
-        this.bandList.add(new BandModel("David Bowie"));
-        this.bandList.add(new BandModel("The Who"));
-        this.bandList.add(new BandModel("Bruce Springsteen"));
-        this.bandList.add(new BandModel("Deep Purple"));
-        this.bandList.add(new BandModel("The Allman Brothers"));
-        this.bandList.add(new BandModel("Jimmy Hendrix"));
-        this.bandList.add(new BandModel("Grateful Dead"));
-        this.bandList.add(new BandModel("Jefferson Airplane"));
-        this.bandList.add(new BandModel("The Rolling Stones"));
-        this.bandList.add(new BandModel("Fleetwood Mac"));
-        this.bandList.add(new BandModel("Santana"));
-        this.bandList.add(new BandModel("Lynyrd Skynyrd"));
-        this.bandList.add(new BandModel("Bob Dylan"));
-        this.bandList.add(new BandModel("James Taylor"));
-        this.bandList.add(new BandModel("Men Without Hats"));
-        this.bandList.add(new BandModel("Men at Work"));
-        this.bandList.add(new BandModel("The Ramones"));
-        this.bandList.add(new BandModel("AC/DC"));
-        this.bandList.add(new BandModel("KISS"));
+        band = new BandModel("Led Zeppelin");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Pink Floyd");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Queen");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("David Bowie");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("The Who");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Bruce Springsteen");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Deep Purple");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("The Allman Brothers");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+        ;
+        band = new BandModel("Jimmy Hendrix");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Grateful Dead");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Jefferson Airplane");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("The Rolling Stones");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Fleetwood Mac");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Santana");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Lynyrd Skynyrd");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Bob Dylan");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("James Taylor");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Men Without Hats");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("Men at Work");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("The Ramones");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("AC/DC");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
+        band = new BandModel("KISS");
+        this.bandList.add(band);
+        BandCollection.Get().addBand(band);
+
 
     }
 }

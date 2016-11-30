@@ -9,11 +9,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+import java.util.UUID;
+
+import static com.example.pj.item_rankings.BandTouchHelper.EX_BAND_ID;
+
 public class DetailsActivity extends AppCompatActivity {
 
     private EditText et_bName;
     private EditText et_bDescription;
-    private Button btn_apply;
+    private List<BandModel> bandList;
+    private BandModel band;
+
     private static final String EX_BAND_NAME = "bandName";
     private static final String EX_BAND_DESCRIPTION = "bandDescription";
 
@@ -26,14 +33,16 @@ public class DetailsActivity extends AppCompatActivity {
         et_bDescription = (EditText) findViewById(R.id.bandDescription_et);
 
         Intent intent = getIntent();
-        final String bName = intent.getStringExtra(EX_BAND_NAME);
+        String bName = intent.getStringExtra(EX_BAND_NAME);
         String bDescription = intent.getStringExtra(EX_BAND_DESCRIPTION);
+        UUID bId = (UUID) intent.getSerializableExtra(EX_BAND_ID);
 
         et_bName.setText(bName);
         et_bDescription.setText(bDescription);
+        this.band = BandCollection.Get().getBand(bId);
 
 
-        /*et_bName.addTextChangedListener(new TextWatcher() {
+        et_bName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -43,7 +52,11 @@ public class DetailsActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(et_bName.getText()==null)
                 {
-
+                    band.setBandName("Really??!!");
+                }
+                else
+                {
+                    band.setBandName(et_bName.getText().toString());
                 }
 
             }
@@ -52,7 +65,31 @@ public class DetailsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });*/
+        });
+        et_bDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(et_bName.getText()==null)
+                {
+                    band.setDescription("come on");
+                }
+                else
+                {
+                    band.setDescription(et_bDescription.getText().toString());
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
     }
@@ -60,10 +97,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void applyClick(View view) {
 
-        Intent retur = new Intent();
-        retur.putExtra("bandN", et_bName.getText());
-        retur.putExtra("bandD", et_bDescription.getText());
-        setResult(1,retur);
+
         finish();
 
 

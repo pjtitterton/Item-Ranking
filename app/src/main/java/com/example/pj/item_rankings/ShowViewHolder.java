@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-
+import static com.example.pj.item_rankings.BandTouchHelper.EX_BAND_ID;
 
 
 public class ShowViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
@@ -16,7 +16,7 @@ public class ShowViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView tv_showBand;
     private static final String EX_BAND_NAME = "bandName";
     private static final String EX_BAND_DESCRIPTION = "bandDescription";
-    private static final int RESULT_CODE = 1;
+
     private BandModel band;
     private Context context;
     private String newBandName;
@@ -43,7 +43,8 @@ public class ShowViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Intent bandIntent = new Intent(context,DetailsActivity.class);
         bandIntent.putExtra(EX_BAND_NAME, this.band.getBandName());
         bandIntent.putExtra(EX_BAND_DESCRIPTION, this.band.getDescription());
-        ((Activity)context).startActivityForResult(bandIntent,1);
+        bandIntent.putExtra(EX_BAND_ID, this.band.getId());
+        context.startActivity(bandIntent);
 
 
 
@@ -54,20 +55,6 @@ public class ShowViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         this.tv_showBand.setText(showEq);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK)
-            {
-                newBandName=data.getStringExtra("bandN");
-                newBandDescription=data.getStringExtra("bandD");
-                band.setBandName(newBandName);
-                band.setDescription(newBandDescription);
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-
-            }
-        }
-    }
 
 }
