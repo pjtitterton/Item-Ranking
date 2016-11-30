@@ -1,5 +1,7 @@
 package com.example.pj.item_rankings;
 
+        import android.app.Activity;
+        import android.content.Intent;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv_didNotCopy;
     private RecyclerView.Adapter notCopiedAdapter;
     private RecyclerView.LayoutManager aLayoutManager;
+    public String newBandName;
+    public String newBandDescription;
 
-    private List<String> bandList = new ArrayList<>();
+    private List<BandModel> bandList = new ArrayList<>();
 
 
     @Override
@@ -36,36 +40,59 @@ public class MainActivity extends AppCompatActivity {
         rv_didNotCopy.setAdapter(notCopiedAdapter);
 
         //swipe stuff
-        ItemTouchHelper.Callback callit = new BandTouchHelper((basicAdapter) notCopiedAdapter);
+        ItemTouchHelper.Callback callit = new BandTouchHelper(this, (basicAdapter) notCopiedAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(callit);
         helper.attachToRecyclerView(rv_didNotCopy);
+    }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        this.rv_didNotCopy.getAdapter().notifyDataSetChanged();
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK)
+            {
+                newBandName=data.getStringExtra("bandN");
+                newBandDescription=data.getStringExtra("bandD");
+                this.bandList.add(new BandModel(newBandName,newBandDescription));
+                this.rv_didNotCopy.getAdapter().notifyDataSetChanged();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
     }
 
     private void hardCodeBands()
     {
-        this.bandList.add("Led Zeppeln");
-        this.bandList.add("Pink Floyd");
-        this.bandList.add("Queen");
-        this.bandList.add("David Bowie");
-        this.bandList.add("The Who");
-        this.bandList.add("Bruce Springsteen");
-        this.bandList.add("Deep Purple");
-        this.bandList.add("The Allman Brothers");
-        this.bandList.add("Jimmy Hendrix");
-        this.bandList.add("Grateful Dead");
-        this.bandList.add("Jefferson Airplane");
-        this.bandList.add("The Rolling Stones");
-        this.bandList.add("Fleetwood Mac");
-        this.bandList.add("Santana");
-        this.bandList.add("Lynyrd Skynyrd");
-        this.bandList.add("Bob Dylan");
-        this.bandList.add("James Taylor");
-        this.bandList.add("Men Without Hats");
-        this.bandList.add("Men at Work");
-        this.bandList.add("The Ramones");
-        this.bandList.add("AC/DC");
-        this.bandList.add("KISS");
+        this.bandList.add(new BandModel("Led Zeppelin"));
+        this.bandList.add(new BandModel("Pink Floyd"));
+        this.bandList.add(new BandModel("Queen"));
+        this.bandList.add(new BandModel("David Bowie"));
+        this.bandList.add(new BandModel("The Who"));
+        this.bandList.add(new BandModel("Bruce Springsteen"));
+        this.bandList.add(new BandModel("Deep Purple"));
+        this.bandList.add(new BandModel("The Allman Brothers"));
+        this.bandList.add(new BandModel("Jimmy Hendrix"));
+        this.bandList.add(new BandModel("Grateful Dead"));
+        this.bandList.add(new BandModel("Jefferson Airplane"));
+        this.bandList.add(new BandModel("The Rolling Stones"));
+        this.bandList.add(new BandModel("Fleetwood Mac"));
+        this.bandList.add(new BandModel("Santana"));
+        this.bandList.add(new BandModel("Lynyrd Skynyrd"));
+        this.bandList.add(new BandModel("Bob Dylan"));
+        this.bandList.add(new BandModel("James Taylor"));
+        this.bandList.add(new BandModel("Men Without Hats"));
+        this.bandList.add(new BandModel("Men at Work"));
+        this.bandList.add(new BandModel("The Ramones"));
+        this.bandList.add(new BandModel("AC/DC"));
+        this.bandList.add(new BandModel("KISS"));
 
     }
 }
